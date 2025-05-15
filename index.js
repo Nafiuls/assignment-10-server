@@ -1,13 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
-require("dotenv").config();
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const port = 5000;
 
-//
-//
-//
+// middleware
 app.use(express.json());
 app.use(cors());
 
@@ -24,8 +22,8 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    await client.connect();
-    await client.db("admin").command({ ping: 1 });
+    // await client.connect();
+    // await client.db("admin").command({ ping: 1 });
 
     const chillGame = client.db("chillGame");
     const reviews = chillGame.collection("reviews");
