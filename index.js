@@ -1,17 +1,17 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+require("dotenv").config();
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const port = 5000;
 
-// snafiul700
-// mNhUfNBQqtDc1I0E
+//
+//
 //
 app.use(express.json());
 app.use(cors());
 
-const uri =
-  "mongodb+srv://snafiul700:mNhUfNBQqtDc1I0E@cluster0.s5vxe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.s5vxe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -93,6 +93,14 @@ async function run() {
     app.post("/add-watchlist", async (req, res) => {
       const data = req.body;
       const result = await watchList.insertOne(data);
+      res.send(result);
+    });
+
+    // get watchlist data with user email
+    app.get("/watchlist/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { userEmail: email };
+      const result = await watchList.find(query).toArray();
       res.send(result);
     });
 
