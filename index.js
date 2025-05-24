@@ -6,7 +6,11 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const port = 5000;
 
 // middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://bucolic-hamster-1597d1.netlify.app/"],
+  })
+);
 app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.s5vxe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
