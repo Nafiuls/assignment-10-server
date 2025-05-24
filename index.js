@@ -8,7 +8,7 @@ const port = 5000;
 // middleware
 app.use(
   cors({
-    origin: ["https://bucolic-hamster-1597d1.netlify.app/"],
+    origin: ["https://bucolic-hamster-1597d1.netlify.app"],
   })
 );
 app.use(express.json());
